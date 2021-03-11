@@ -1,50 +1,48 @@
-/// <reference path="../models/drag-drop.ts"  />
-/// <reference path="../decorators/common.ts"  />
-/// <reference path="../models/project.ts"  />
+import { Draggable } from "../models/drag-drop.js";
+import { autobind } from "../decorators/common.js";
+import { Project } from "../models/project.js";
 
-namespace App {
-  export class ProjectItem implements Draggable {
-    elementEl: HTMLLIElement;
+export default class ProjectItem implements Draggable {
+  elementEl: HTMLLIElement;
 
-    constructor(public parentEl: HTMLUListElement, public project: Project) {
-      const templateEl = document.getElementById(
-        "single-project"
-      )! as HTMLTemplateElement;
-      this.elementEl = document.importNode(templateEl.content, true)
-        .firstElementChild! as HTMLLIElement;
-    }
+  constructor(public parentEl: HTMLUListElement, public project: Project) {
+    const templateEl = document.getElementById(
+      "single-project"
+    )! as HTMLTemplateElement;
+    this.elementEl = document.importNode(templateEl.content, true)
+      .firstElementChild! as HTMLLIElement;
+  }
 
-    bind() {
-      this.elementEl.addEventListener("dragstart", this.dragStartHandler);
-      this.elementEl.addEventListener("dragend", this.dragEndHandler);
-    }
+  bind() {
+    this.elementEl.addEventListener("dragstart", this.dragStartHandler);
+    this.elementEl.addEventListener("dragend", this.dragEndHandler);
+  }
 
-    @autobind
-    dragStartHandler(event: DragEvent): void {
-      event.dataTransfer!.setData("text/plain", this.project.id.toString());
-      event.dataTransfer!.effectAllowed = "move";
-    }
+  @autobind
+  dragStartHandler(event: DragEvent): void {
+    event.dataTransfer!.setData("text/plain", this.project.id.toString());
+    event.dataTransfer!.effectAllowed = "move";
+  }
 
-    @autobind
-    dragEndHandler(_: DragEvent): void {
-      console.log("Project item - drag end");
-    }
+  @autobind
+  dragEndHandler(_: DragEvent): void {
+    console.log("Project item - drag end");
+  }
 
-    get persons() {
-      const plural = this.project.people > 1 ? "s" : "";
+  get persons() {
+    const plural = this.project.people > 1 ? "s" : "";
 
-      return `${this.project.people} person${plural}`;
-    }
+    return `${this.project.people} person${plural}`;
+  }
 
-    render() {
-      this.elementEl.id = `project-${this.project.id}`;
-      this.elementEl.querySelector("h2")!.textContent = this.project.title;
-      this.elementEl.querySelector(
-        "h3"
-      )!.textContent = `${this.persons} assigned`;
-      this.elementEl.querySelector("p")!.textContent = this.project.description;
+  render() {
+    this.elementEl.id = `project-${this.project.id}`;
+    this.elementEl.querySelector("h2")!.textContent = this.project.title;
+    this.elementEl.querySelector(
+      "h3"
+    )!.textContent = `${this.persons} assigned`;
+    this.elementEl.querySelector("p")!.textContent = this.project.description;
 
-      this.parentEl.appendChild(this.elementEl);
-    }
+    this.parentEl.appendChild(this.elementEl);
   }
 }

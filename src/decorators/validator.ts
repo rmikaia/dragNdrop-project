@@ -1,71 +1,69 @@
-/// <reference path="../models/common.ts"  />
-/// <reference path="../models/project.ts"  />
-/// <reference path="../models/validator.ts"  />
+import { CommonConstructor } from "../models/common.js";
+import { ProjectMetadata } from "../models/project.js";
+import { ValidatorProps, Validators } from "../models/validator.js";
 
-namespace App {
-  export function requireValidation<T extends CommonConstructor>(
-    OriginalConstructor: T
-  ) {
-    return class extends OriginalConstructor {
-      validators: unknown;
+export function requireValidation<T extends CommonConstructor>(
+  OriginalConstructor: T
+) {
+  return class extends OriginalConstructor {
+    validators: unknown;
 
-      validate(inputData: ProjectMetadata) {
-        const validators = this.validators as Validators;
-        let isValid = true;
+    validate(inputData: ProjectMetadata) {
+      const validators = this.validators as Validators;
+      let isValid = true;
 
-        for (const key in inputData) {
-          isValid = isValid && checkRequired(inputData[key], validators[key]);
-          isValid = isValid && checkMaxLength(inputData[key], validators[key]);
-        }
-
-        return isValid;
+      for (const key in inputData) {
+        isValid = isValid && checkRequired(inputData[key], validators[key]);
+        isValid = isValid && checkMaxLength(inputData[key], validators[key]);
       }
-    };
-  }
 
-  export function required(target: any, propName: string) {
-    setValidator(target, propName, { required: true });
-  }
-
-  export function maxLength(maxLength: number) {
-    return (target: any, propName: string) => {
-      setValidator(target, propName, { maxLength });
-    };
-  }
-
-  // Functions
-  function checkRequired(propValue: any, validator: Partial<ValidatorProps>) {
-    let isValid = true;
-
-    if (validator.required) {
-      isValid = isValid && propValue !== "";
+      return isValid;
     }
-
-    return isValid;
-  }
-
-  function checkMaxLength(propValue: any, validator: Partial<ValidatorProps>) {
-    let isValid = true;
-
-    if (validator.maxLength) {
-      isValid = isValid && propValue <= validator.maxLength;
-    }
-
-    return isValid;
-  }
-
-  const setValidator = (
-    target: any,
-    propName: string,
-    value: { [T: string]: any }
-  ) => {
-    if (!target.validators) {
-      target.validators = {};
-    }
-
-    return (target.validators[propName] = {
-      ...target.validators[propName],
-      ...value,
-    });
   };
 }
+
+export function required(target: any, propName: string) {
+  setValidator(target, propName, { required: true });
+}
+
+export function maxLength(maxLength: number) {
+  return (target: any, propName: string) => {
+    setValidator(target, propName, { maxLength });
+  };
+}
+
+// Functions
+function checkRequired(propValue: any, validator: Partial<ValidatorProps>) {
+  let isValid = true;
+
+  if (validator.required) {
+    isValid = isValid && propValue !== "";
+  }
+
+  return isValid;
+}
+
+function checkMaxLength(propValue: any, validator: Partial<ValidatorProps>) {
+  let isValid = true;
+
+  if (validator.maxLength) {
+    isValid = isValid && propValue <= validator.maxLength;
+  }
+
+  return isValid;
+}
+
+const setValidator = (
+  target: any,
+  propName: string,
+  value: { [T: string]: any }
+) => {
+  if (!target.validators) {
+    target.validators = {};
+  }
+
+  return (target.validators[propName] = {
+    ...target.validators[propName],
+    ...value,
+  });
+};

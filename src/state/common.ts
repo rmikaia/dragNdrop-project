@@ -1,11 +1,9 @@
-namespace App {
-  export class State<T> {
-    protected listeners: ((project: T) => void)[] = [];
+export default class State<T> {
+  protected listeners: ((project: T) => void)[] = [];
 
-    constructor() {}
+  constructor() {}
 
-    addListener(listener: (projects: T) => void) {
-      this.listeners.push(listener);
-    }
+  addListener(listener: (projects: T) => void) {
+    this.listeners.push(listener);
   }
 }

@@ -1,3 +1,1 @@
-namespace App {
-  export type CommonConstructor = { new (...arg: any[]): {} };
-}
+export type CommonConstructor = { new (...arg: any[]): {} };
