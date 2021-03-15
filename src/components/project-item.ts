@@ -1,6 +1,6 @@
-import { Draggable } from "../models/drag-drop.js";
-import { autobind } from "../decorators/common.js";
-import { Project } from "../models/project.js";
+import { Draggable } from "../models/drag-drop";
+import { autobind } from "../decorators/common";
+import { Project } from "../models/project";
 
 export default class ProjectItem implements Draggable {
   elementEl: HTMLLIElement;

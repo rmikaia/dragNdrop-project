@@ -1,6 +1,6 @@
-import { CommonConstructor } from "../models/common.js";
-import { ProjectMetadata } from "../models/project.js";
-import { ValidatorProps, Validators } from "../models/validator.js";
+import { CommonConstructor } from "../models/common";
+import { ProjectMetadata } from "../models/project";
+import { ValidatorProps, Validators } from "../models/validator";
 
 export function requireValidation<T extends CommonConstructor>(
   OriginalConstructor: T

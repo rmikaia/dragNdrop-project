@@ -1,8 +1,8 @@
-import { DragTarget } from "../models/drag-drop.js";
-import { autobind } from "../decorators/common.js";
-import ProjectItem from "./project-item.js";
-import { Project, ProjectStatus } from "../models/project.js";
-import { PROJECT_STATE } from "../state/project.js";
+import { DragTarget } from "../models/drag-drop";
+import { autobind } from "../decorators/common";
+import ProjectItem from "./project-item";
+import { Project, ProjectStatus } from "../models/project";
+import { PROJECT_STATE } from "../state/project";
 
 export default class ProjectsList implements DragTarget {
   templateEl: HTMLTemplateElement;

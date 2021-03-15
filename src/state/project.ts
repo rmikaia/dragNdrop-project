@@ -1,5 +1,5 @@
-import State from "./common.js";
-import { Project, ProjectStatus } from "../models/project.js";
+import State from "./common";
+import { Project, ProjectStatus } from "../models/project";
 
 class ProjectState extends State<Project[]> {
   private static instance: ProjectState;

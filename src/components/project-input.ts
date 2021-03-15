@@ -2,10 +2,10 @@ import {
   requireValidation,
   required,
   maxLength,
-} from "../decorators/validator.js";
-import { autobind } from "../decorators/common.js";
-import { Project, ProjectMetadata, ProjectStatus } from "../models/project.js";
-import { PROJECT_STATE } from "../state/project.js";
+} from "../decorators/validator";
+import { autobind } from "../decorators/common";
+import { Project, ProjectMetadata, ProjectStatus } from "../models/project";
+import { PROJECT_STATE } from "../state/project";
 
 @requireValidation
 export default class ProjectInput {

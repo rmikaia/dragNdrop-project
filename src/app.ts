@@ -1,6 +1,6 @@
-import ProjectInput from "./components/project-input.js";
-import ProjectsList from "./components/projects-list.js";
-import { ProjectStatus } from "./models/project.js";
+import ProjectInput from "./components/project-input";
+import ProjectsList from "./components/projects-list";
+import { ProjectStatus } from "./models/project";
 
 const projectInput = new ProjectInput();
 projectInput.bind();
