@@ -1,15 +1,15 @@
 import ProjectInput from "./components/project-input";
 import ProjectsList from "./components/projects-list";
+import View from "./components/view";
 import { ProjectStatus } from "./models/project";
 
-const projectInput = new ProjectInput();
-projectInput.bind();
-projectInput.render();
+const Views: View[] = [
+  new ProjectInput(),
+  new ProjectsList(ProjectStatus.Active),
+  new ProjectsList(ProjectStatus.Finished),
+];
 
-const activeProjectsList = new ProjectsList(ProjectStatus.Active);
-activeProjectsList.bind();
-activeProjectsList.render();
-
-const finishedProjectsList = new ProjectsList(ProjectStatus.Finished);
-finishedProjectsList.bind();
-finishedProjectsList.render();
+Views.forEach((view) => {
+  view.bind();
+  view.render();
+});

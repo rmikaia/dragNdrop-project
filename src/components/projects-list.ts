@@ -3,8 +3,9 @@ import { autobind } from "../decorators/common";
 import ProjectItem from "./project-item";
 import { Project, ProjectStatus } from "../models/project";
 import { PROJECT_STATE } from "../state/project";
+import View from "./view";
 
-export default class ProjectsList implements DragTarget {
+export default class ProjectsList extends View implements DragTarget {
   templateEl: HTMLTemplateElement;
   hostEl: HTMLDivElement;
   listContainerEl: HTMLElement;
@@ -12,6 +13,8 @@ export default class ProjectsList implements DragTarget {
   relevantProjects: Project[] = [];
 
   constructor(private type: "active" | "finished") {
+    super();
+
     this.templateEl = document.getElementById(
       "project-list"
     )! as HTMLTemplateElement;

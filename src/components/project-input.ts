@@ -6,9 +6,10 @@ import {
 import { autobind } from "../decorators/common";
 import { Project, ProjectMetadata, ProjectStatus } from "../models/project";
 import { PROJECT_STATE } from "../state/project";
+import View from "./view";
 
 @requireValidation
-export default class ProjectInput {
+export default class ProjectInput extends View {
   templateEl: HTMLTemplateElement;
   hostEl: HTMLDivElement;
   formEl: HTMLFormElement;
@@ -28,6 +29,8 @@ export default class ProjectInput {
   peopleEl: HTMLInputElement;
 
   constructor() {
+    super();
+
     this.templateEl = document.getElementById(
       "project-input"
     )! as HTMLTemplateElement;

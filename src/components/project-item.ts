@@ -1,11 +1,14 @@
 import { Draggable } from "../models/drag-drop";
 import { autobind } from "../decorators/common";
 import { Project } from "../models/project";
+import View from "./view";
 
-export default class ProjectItem implements Draggable {
+export default class ProjectItem extends View implements Draggable {
   elementEl: HTMLLIElement;
 
   constructor(public parentEl: HTMLUListElement, public project: Project) {
+    super();
+
     const templateEl = document.getElementById(
       "single-project"
     )! as HTMLTemplateElement;
